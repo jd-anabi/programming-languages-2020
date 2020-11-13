@@ -31,9 +31,9 @@ Your repository needs to contain a folder `Assignment-2-1` which must be identic
 
 - You can ignore `LambdaNat1`.
 
-- Start the [work cycle](https://github.com/alexhkurz/programming-languages-2020/blob/master/Lab1-Lambda-Calculus/README.md#the-work-cycle-build-a-new-language) from from `LambdaNat2`.
+- Start the [work cycle](https://github.com/alexhkurz/programming-languages-2020/blob/master/Lab1-Lambda-Calculus/README.md#the-work-cycle-build-a-new-language) with `LambdaNat2` as `LambdaNatOld`.
 
-- Create a directory `LambdaNat3` by adding `if-then-else` to the language.
+- Create a directory `LambdaNat3` (`LambdaNatNew`) by adding `if-then-else` to the language.
 
  - Change the grammar, so that 
 
@@ -42,7 +42,7 @@ Your repository needs to contain a folder `Assignment-2-1` which must be identic
     is legal syntax, given that the expressions `e1, ... e4` are.
 
 - In the interpreter
-    -  add a clause to the definition of `evalCBN` evaluating  if-then-else.
+    -  add a clause to the definition of `evalCBN` evaluating  if-then-else. [Hint: Use Haskell's native if-then-else to interpret your own if-then-else.]
 
     -  add a clause to the definition of `subst` that substitutes into `if e1 = e2 then e3 else e4` by substituting into the sub-terms `e1, ... e4`. 
 
@@ -50,4 +50,26 @@ Your repository needs to contain a folder `Assignment-2-1` which must be identic
 
 ## Part 2
 
-... to be continued ...
+This is essentially the [homework from the Tuesday lecture](https://hackmd.io/Mt3etYA-QPe3vQGD-bBkLw?both#Homework). There are no points, but in case you will ask for an extension of the final deadline, I will make this dependent on whether you finished Part 2 by **Friday, Nov 13**.
+
+Your repository needs to contain a folder `Assignment-2-2` which must be identical which the one [here](https://github.com/alexhkurz/programming-languages-2020/tree/master/Assignment-2-2), with the exeption of the following:
+
+Add the following programs to `LambdaNat4/test`.
+
+- `addition.lc`
+- `multiplication.lc`
+- `factorial.lc`
+- `fibonacci.lc`
+
+Before writing these programs, I recommend to study the examples in [test.lc](https://github.com/alexhkurz/programming-languages-2020/blob/master/Assignment-2-2/LambdaNat4/test/test.lc).
+
+These are all programs we have written before in Haskell, so that should not take you more than 1 hour. If you can run and test these programs you should be ready to start Part 3 on Friday.
+
+## Part 3
+
+...
+
+
+
+
+
