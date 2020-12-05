@@ -21,11 +21,11 @@ evalCBN (EIf e1 e2 e3 e4) = if (evalCBN e1) == (evalCBN e2) then evalCBN e3 else
 evalCBN (ELet i e1 e2) = evalCBN (EApp (EAbs i e2) e1) 
 evalCBN (ERec i e1 e2) = evalCBN (EApp (EAbs i e2) (EFix (EAbs i e1)))
 evalCBN (EFix e) = evalCBN (EApp e (EFix e)) 
-evalCBN (EMinusOne e) = case (evalCBN e) of
-    ENat0 -> ENat0
-    (ENatS e) -> e
 evalCBN (ENatS e') = ENatS (evalCBN e')
-evalCBN x = x
+evalCBN (EMinusOne e) = case (evalCBN e) of
+    (ENatS e) -> e
+-- the default must be the last line of evalCBN:
+evalCBN x = x 
 
 fresh_ :: Exp -> String
 fresh_ (EVar (Id i)) = i ++ "0"

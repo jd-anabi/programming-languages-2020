@@ -52,19 +52,27 @@ Your repository needs to contain a folder `Assignment-2-1` which must be identic
 
 This is essentially the [homework from the Tuesday lecture](https://hackmd.io/Mt3etYA-QPe3vQGD-bBkLw?both#Homework). There are no points, but in case you will ask for an extension of the final deadline, I will make this dependent on whether you finished Part 2 by **Friday, Nov 13**.
 
-Your repository needs to contain a folder `Assignment-2-2` which must be identical which the one [here](https://github.com/alexhkurz/programming-languages-2020/tree/master/Assignment-2-2), with the exeption of the following:
+Your repository needs to contain a folder `Assignment-2-2` which must be identical which the one [here](https://github.com/alexhkurz/programming-languages-2020/tree/master/Assignment-2-2), with the exeption of the own programs you add.
 
-Add the following programs to `LambdaNat4/test`.
+**Task 1:** Change the implementation of `minus_one` in the interpreter so that the following programs compute correctly:
+
+
+
+**Task 2:** Add the following programs to `LambdaNat4/test`.
 
 - `multiplication.lc`
 - `factorial.lc`
 
-Before writing these programs, I recommend to study the examples in [test](https://github.com/alexhkurz/programming-languages-2020/blob/master/Assignment-2-2/LambdaNat4/test/).
+**Hint:** Before writing these programs, I recommend to study the examples in [test](https://github.com/alexhkurz/programming-languages-2020/blob/master/Assignment-2-2/LambdaNat4/test/).
 
 These are all programs we have written before in Haskell, so that should not take you more than 1 hour. If you can run and test these programs you should be ready to start Part 3 on Friday.
 
 
 ## Part 3
+
+(search for "Task" if you want to shortcut the explanations below)
+
+Deadline: **Friday, Nov 20**.
 
 The purpose of the assignment is to build a simple programming language that has function definitions, function application, numbers, conditionals, recursion and lists.
 
@@ -104,10 +112,18 @@ For the exercise below, recall that abstract syntax is defined in `AbsLambdaNat.
 
 Note that this does not specify what will happen if your computation reaches `hd #` or `tl #`. In my implementation the computation will just get stuck at `hd #` or `tl #`, in more sophisticated implementations, you would probably want to have something like a runtime exception.
 
+Here are some further test cases to check whether your interpreter "reduces under a `hd`". 
+
+    hd ((\ x . x) a : #)   --->   a
+    hd ((\ x . x) a) : #   --->   a
+
+Similarly, one should reduce under a `tl`.
+
 **Hint:** Recall the `case` expressions for `EApp` or `EMinusOne`.  The code in the interpreter for `EHd e` needs to 
 - evaluate `e`
 - in case `evalCBN e` is of the form `ECons e1 e2` the result obtained by evaluating the head of the list represented by `ECons e1 e2`.
 
+Also note that lists are similar to numbers. After all, a successor number is essentially just a list of `S`s (and `0` plays a role similar to the EndOfList symbol `#`). Taking this comparison further, `tail` corresponds to `minus_one` since both chop off the first element of their respective input. 
 
 **Exercise:** (not necessary to hand this in, but should help to see how to implement the two rules above in `Interpreter.hs`) Translate the computation rule `hd a:b:c:#   --->   a` from concrete syntax to abstract syntax. Also run `hd a:b:c:#` in the parser and compare.
 
@@ -173,13 +189,15 @@ and in Haskell by
 
 To solve the exercises below, I recommended to first write down similar equational definitions before attempting to implement them in `LambdaNat5`. 
 
+**Task:** Implement the functions below in `LambdaNat5`.
+
 #### `le`
 
 `le` (for less or equal) is smilar to the `less` function of the calculator, but we want "less or equal" here. Examples:
 
     le S 0 S 0 ---> S 0
     le S 0 S S 0 ---> S 0
-    le S 0 0 = 0 ---> 0
+    le S 0 0 ---> 0
 
 `--->` is used here for the input/output relation. Following a common convention in C-like programming languages `S 0` stands for true and `0` for false.
 
@@ -196,6 +214,7 @@ To solve the exercises below, I recommended to first write down similar equation
     merge (0 : S S 0 : S S S S 0 : #) (S 0 : S S S 0 : #) 
     ---> 0 : S 0 : S S 0 : S S S 0 : S S S S 0 : #
 
+Hint: `merge` needs to use `le`.
 
 #### `mergeLists`
 
@@ -204,7 +223,9 @@ Provided with a list of ordered lists of numbers, `mergeLists` merges all these 
     mergeLists (makeLists (S S S S 0:S S S 0:S S 0:S 0: 0: #))
     ---> (0 : S 0 : S S 0 : S S S 0 : S S S S 0 : #) : #
 
-[Hint: The definition of `mergeLists` will include the definitions of the three other functions above.]
+Hints: 
+- The definition of `mergeLists` will include the definitions of the three other functions above.
+- Note that `makeLists` makes a list of lists, all of which are in ascending order (just because the all contain one and only one element).
 
 
 
